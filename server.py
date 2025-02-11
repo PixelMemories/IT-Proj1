@@ -33,6 +33,3 @@ def server():
 if __name__ == "__main__":
     t1 = threading.Thread(name='server', target=server)
     t1.start()
-
-    time.sleep(5)
-    print("Done.")
