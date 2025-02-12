@@ -36,7 +36,7 @@ def client():
     # start part 5 here. the idea is to read each line of the file one by one in a while loop
     # then for each line (each iteration of the loop) you are gonna send it to the server.
     # somethings to watch out for. you wanna make sure you wait a bit after each line to make sure the server has finished writing
-    # if you wanna get really creative, make a way for the server to tell your client the line has been written THEN start the next iteration
+    # if you wanna get really creative, make a way for the server to tell your client the line has been written THEN start the next iteration (loop in the server not here)
 
     # close the client socket
     cs.close()
