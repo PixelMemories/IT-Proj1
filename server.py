@@ -34,6 +34,9 @@ def server():
     alter = reverse_and_lowercase(data_from_client)
     csockid.send(alter)
 
+    # start part 5 here. You are gonna recieve each line of the sent files and then run my 
+    # reverse_and_lowecase method on the data. Then you write it into an output file called "out-proj.txt"
+
     # Close the server socket
     ss.close()
     exit()
