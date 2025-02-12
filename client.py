@@ -25,13 +25,19 @@ def client():
     data_from_server=cs.recv(100)
     print("[C]: Data received from server: {}".format(data_from_server.decode('utf-8')))
 
+    # send hello
+    msg = "HELLO"
+    cs.send(msg.encode('utf-8'))
+
+    # get back altered hello
+    alter_from_server = cs.recv(100)
+    print("[C]: Message received from server: {}".format(alter_from_server.decode('utf-8')))
+
     # close the client socket
     cs.close()
     exit()
 
 if __name__ == "__main__":
-
-    time.sleep(random.random() * 5)
     t2 = threading.Thread(name='client', target=client)
     t2.start()
 

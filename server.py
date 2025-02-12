@@ -26,9 +26,21 @@ def server():
     msg = "Welcome to CS 352!"
     csockid.send(msg.encode('utf-8'))
 
+    # recv hello
+    data_from_client=csockid.recv(100)
+    print("[S]: Got the Message: {}".format(data_from_client.decode('utf-8')))
+
+    # do something to hello and send back
+    alter = reverse_and_lowercase(data_from_client)
+    csockid.send(alter)
+
     # Close the server socket
     ss.close()
     exit()
+
+def reverse_and_lowercase(input_string):
+    reversed_string = input_string[::-1]  # Reverses the string
+    return reversed_string.lower()  # Converts to lowercase
 
 if __name__ == "__main__":
     t1 = threading.Thread(name='server', target=server)
