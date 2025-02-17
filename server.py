@@ -32,7 +32,7 @@ def server():
     print("[S]: Got the Message: {}".format(data_from_client.decode('utf-8')))
 
     # do something to hello and send back
-    alter = reverse_and_lowercase(data_from_client)
+    alter = reverse(data_from_client)
     csockid.send(alter)
 
     # Part 5 Author: Wesley Zhou (wgz4)
@@ -43,31 +43,31 @@ def server():
             while True:
                 # Receive a line from the client
                 line = csockid.recv(200).decode('utf-8')
+                # Exit loop if no more data is received
                 if not line:
-                    break  # Exit loop if no more data is received
+                    break  
 
                 print(f"[S]: Received line from client: {line}")
 
                 # Reverse and lowercase the line
-                processed_line = reverse_and_lowercase(line.encode('utf-8')).decode('utf-8')
+                processed_line = reverse(line.encode('utf-8')).decode('utf-8')
                 print(f"[S]: Processed line: {processed_line}")
 
                 # Write the processed line to the output file
                 file.write(processed_line + '\n')
 
                 # Send confirmation back to the client
-                csockid.send("ACK".encode('utf-8'))  # Acknowledgment
+                csockid.send("ACK".encode('utf-8')) 
     except Exception as e:
         print(f"[S]: Error writing to file: {e}")
-    # reverse_and_lowecase method on the data. Then you write it into an output file called "out-proj.txt"
 
-    # Close the server socket
     ss.close()
     exit()
 
-def reverse_and_lowercase(input_string):
-    reversed_string = input_string[::-1]  # Reverses the string
-    return reversed_string.swapcase()  # Converts to lowercase
+# Reverses the string and swaps the casing (rl902)
+def reverse(input_string):
+    reversed_string = input_string[::-1] 
+    return reversed_string.swapcase() 
 
 if __name__ == "__main__":
     t1 = threading.Thread(name='server', target=server)

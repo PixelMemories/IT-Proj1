@@ -41,7 +41,7 @@ def client():
         with open(input_file, 'r') as file:
             for line in file:
                 # Send the line to the server
-                cs.send(line.strip().encode('utf-8'))  # Strip newline characters
+                cs.send(line.strip().encode('utf-8'))
                 print(f"[C]: Sent line to server: {line.strip()}")
 
                 # Wait for server confirmation
@@ -52,7 +52,6 @@ def client():
     except Exception as e:
         print(f"[C]: Error reading file: {e}")
 
-    # close the client socket
     cs.close()
     exit()
 
