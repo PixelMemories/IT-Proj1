@@ -2,7 +2,6 @@ import threading
 import time
 import random
 import os
-
 import socket
 
 def server():
@@ -27,6 +26,7 @@ def server():
     msg = "Welcome to CS 352!"
     csockid.send(msg.encode('utf-8'))
 
+    # Part 4 Author: Richard Li (rl902)
     # recv hello
     data_from_client=csockid.recv(100)
     print("[S]: Got the Message: {}".format(data_from_client.decode('utf-8')))
@@ -35,8 +35,9 @@ def server():
     alter = reverse_and_lowercase(data_from_client)
     csockid.send(alter)
 
-    # start part 5 here. You are gonna recieve each line of the sent files and then run my 
+    # Part 5 Author: Wesley Zhou (wgz4)
     output_file = "out-proj.txt"
+
     try:
         with open(output_file, 'w') as file:
             while True:
@@ -66,7 +67,7 @@ def server():
 
 def reverse_and_lowercase(input_string):
     reversed_string = input_string[::-1]  # Reverses the string
-    return reversed_string.lower()  # Converts to lowercase
+    return reversed_string.swapcase()  # Converts to lowercase
 
 if __name__ == "__main__":
     t1 = threading.Thread(name='server', target=server)

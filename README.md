@@ -1,5 +1,6 @@
-# IT-Proj1
+# Internet Technology 352 Project 1 
+# Warmup: Socket programming 101
 
-# Wesley is a cool dude
-
-# Richard is cool
+# This was a collaborative project between: 
+# Wesley Zhou (wgz4)
+# Richard Li (rl902)
