@@ -1,6 +1,7 @@
 import threading
 import time
 import random
+import os
 
 import socket
 
@@ -34,9 +35,24 @@ def client():
     print("[C]: Message received from server: {}".format(alter_from_server.decode('utf-8')))
 
     # start part 5 here. the idea is to read each line of the file one by one in a while loop
+    input_file = "in-proj.txt"
     # then for each line (each iteration of the loop) you are gonna send it to the server.
     # somethings to watch out for. you wanna make sure you wait a bit after each line to make sure the server has finished writing
     # if you wanna get really creative, make a way for the server to tell your client the line has been written THEN start the next iteration (loop in the server not here)
+    try:
+        with open(input_file, 'r') as file:
+            for line in file:
+                # Send the line to the server
+                cs.send(line.strip().encode('utf-8'))  # Strip newline characters
+                print(f"[C]: Sent line to server: {line.strip()}")
+
+                # Wait for server confirmation
+                confirmation = cs.recv(100).decode('utf-8')
+                print(f"[C]: Server confirmation: {confirmation}")
+    except FileNotFoundError:
+        print(f"[C]: Error: File '{input_file}' not found.")
+    except Exception as e:
+        print(f"[C]: Error reading file: {e}")
 
     # close the client socket
     cs.close()

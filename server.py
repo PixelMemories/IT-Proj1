@@ -1,6 +1,7 @@
 import threading
 import time
 import random
+import os
 
 import socket
 
@@ -35,6 +36,28 @@ def server():
     csockid.send(alter)
 
     # start part 5 here. You are gonna recieve each line of the sent files and then run my 
+    output_file = "out-proj.txt"
+    try:
+        with open(output_file, 'w') as file:
+            while True:
+                # Receive a line from the client
+                line = csockid.recv(200).decode('utf-8')
+                if not line:
+                    break  # Exit loop if no more data is received
+
+                print(f"[S]: Received line from client: {line}")
+
+                # Reverse and lowercase the line
+                processed_line = reverse_and_lowercase(line.encode('utf-8')).decode('utf-8')
+                print(f"[S]: Processed line: {processed_line}")
+
+                # Write the processed line to the output file
+                file.write(processed_line + '\n')
+
+                # Send confirmation back to the client
+                csockid.send("ACK".encode('utf-8'))  # Acknowledgment
+    except Exception as e:
+        print(f"[S]: Error writing to file: {e}")
     # reverse_and_lowecase method on the data. Then you write it into an output file called "out-proj.txt"
 
     # Close the server socket
